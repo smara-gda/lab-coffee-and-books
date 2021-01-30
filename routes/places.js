@@ -36,4 +36,32 @@ router.get('/place/:id', (req, res, next) => {
     });
 });
 
+// handling update  place get request
+router.get('/place/:id/update-place', (req, res, next) => {
+  const id = req.params.id;
+  Place.findById(id)
+    .then((place) => {
+      res.render('places/update', { place });
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+// add a post handler for updating place
+router.post('/place/:id/update-place', (req, res, next) => {
+  const id = req.params.id;
+  const data = req.body;
+  Place.findByIdAndUpdate(id, {
+    name: data.name,
+    type: data.type
+  })
+    .then((place) => {
+      res.redirect(`/place/${place._id}`);
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
 module.exports = router;
