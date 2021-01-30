@@ -25,7 +25,7 @@ router.post('/create-place', (req, res, next) => {
 });
 
 // handling get request for viewing single place
-router.get('place/:id', (req, res, next) => {
+router.get('/place/:id', (req, res, next) => {
   const id = req.params.id;
   Place.findById(id)
     .then((place) => {
