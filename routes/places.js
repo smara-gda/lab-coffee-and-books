@@ -52,12 +52,26 @@ router.get('/place/:id/update-place', (req, res, next) => {
 router.post('/place/:id/update-place', (req, res, next) => {
   const id = req.params.id;
   const data = req.body;
+
   Place.findByIdAndUpdate(id, {
     name: data.name,
     type: data.type
   })
     .then((place) => {
       res.redirect(`/place/${place._id}`);
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+//add handlers to delete places
+
+router.post('/place/:id/delete', (req, res, next) => {
+  const id = req.params.id;
+  Place.findByIdAndDelete(id)
+    .then(() => {
+      res.render('index', { message: 'The place was deleted' });
     })
     .catch((error) => {
       next(error);

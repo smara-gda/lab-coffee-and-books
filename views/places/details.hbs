@@ -4,4 +4,10 @@
 <p>{{place.type}}</p>
 <a href="{{place._id}}/update-place">
     <button>Update place</button>
+    
 </a>
+    <form action="/place/{{place._id}}/delete" method="POST">
+      <a href="{{place._id}}/delete">
+       <button>Delete place</button>
+      </a>
+    </form>
