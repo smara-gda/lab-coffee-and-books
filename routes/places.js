@@ -52,7 +52,8 @@ router.get('/place/:id/update-place', (req, res, next) => {
 router.post('/place/:id/update-place', (req, res, next) => {
   const id = req.params.id;
   const data = req.body;
-
+  // if the user does not provide a new value, we should keep the old one.
+  //Right now this code will update the value to null.
   Place.findByIdAndUpdate(id, {
     name: data.name,
     type: data.type
@@ -72,6 +73,16 @@ router.post('/place/:id/delete', (req, res, next) => {
   Place.findByIdAndDelete(id)
     .then(() => {
       res.render('index', { message: 'The place was deleted' });
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
+router.get('/places', (req, res, next) => {
+  Place.find()
+    .then((places) => {
+      res.render('places/all-places', { places });
     })
     .catch((error) => {
       next(error);

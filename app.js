@@ -37,6 +37,18 @@ app.use((req, res, next) => {
   next(createError(404));
 });
 
+const hbs = require('hbs');
+
+//register hbs helper
+// coffee_shop
+// bookstore
+hbs.registerHelper('split', (aString) => {
+  let book = aString.substring(0, aString.length - 5);
+  const upperCaseBook = book.charAt(0).toUpperCase() + book.slice(1);
+  const store = aString.substring(aString.length - 5, aString.length);
+  return upperCaseBook + ' ' + store;
+});
+
 // Catch all error handler
 app.use((error, req, res, next) => {
   // Set error information, with stack only available in development

@@ -3,9 +3,12 @@
 <form method="POST">
     
 <label for="placeName">Place name</label>
-<input type="text" id="placeName" name="name" placeholder="{{place.name}}">
+<input type="text" id="placeName" name="name" value="{{place.name}}">
 
-<label for="placeType">Type</label>
-<input type="text" id="placeType" name="type" placeholder="{{place.type}}">
-<button>Submit changes </button>
+ <p>Select a place type:</p>
+  <input type="radio" id="coffee_shop" name="type" value="coffee_shop">
+  <label for="coffee_shop">Coffee Shop</label>
+  <input type="radio" id="book_store" name="type" value="bookstore">
+  <label for="book_store">Book Store</label>
+<button type="submit">Submit changes </button>
 </form>
